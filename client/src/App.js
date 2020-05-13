@@ -4,6 +4,7 @@ import Books from './pages/Books';
 import Detail from './pages/Detail';
 import NoMatch from './pages/NoMatch';
 import Nav from './components/Nav';
+import Chat from './components/Chat';
 
 const App = () => (
 	<Router>
@@ -13,6 +14,7 @@ const App = () => (
 				<Route exact path="/" component={Books} />
 				<Route exact path="/books" component={Books} />
 				<Route exact path="/books/:id" component={Detail} />
+				<Route exact path="/chat" component={Chat} />
 				<Route component={NoMatch} />
 			</Switch>
 		</div>
