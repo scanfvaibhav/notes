@@ -8,7 +8,6 @@ const Chat = require('./models/chat');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 5000;
-const SOCKET_PORT =  process.env.PORT || 8081;
 
 // require db connection
 require('./models');
@@ -47,8 +46,8 @@ io.on('connection', function(socket){
     });
    
   });
-  io.listen(SOCKET_PORT, () => {
-    log(`Socket Server is starting at PORT: ${SOCKET_PORT}`);
+  io.listen(PORT, () => {
+    log(`Socket Server is starting at PORT: ${PORT}`);
 });
 // Bootstrap server
 app.listen(PORT, () => {
