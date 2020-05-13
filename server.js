@@ -46,9 +46,7 @@ io.on('connection', function(socket){
     });
    
   });
-  io.listen(PORT, () => {
-    log(`Socket Server is starting at PORT: ${PORT}`);
-});
+  
 // Bootstrap server
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
