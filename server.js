@@ -48,6 +48,6 @@ io.on('connection', function(socket){
   });
   
 // Bootstrap server
-app.listen(PORT, () => {
+http.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
 });
