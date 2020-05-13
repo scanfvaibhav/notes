@@ -23,7 +23,7 @@ class Books extends Component {
 			.then(res => this.loadState(res))
 			.catch(err => console.log(err));
 	};
-	loadState = res  =>  {
+	loadState = (res)  =>  {
 		this.setState({ books: res.data.books, title: '', author: '' });
 		sessionStorage.setItem('socketPort',res.data.port);
 	};
@@ -58,7 +58,7 @@ class Books extends Component {
 				<Row>
 					<Col size="md-6">
 						<Jumbotron>
-							<h1>What Books Should I Read?</h1>
+							<h1>What Books Should?</h1>
 						</Jumbotron>
 						<form>
 							<Input
