@@ -24,6 +24,7 @@ class Books extends Component {
 			.catch(err => console.log(err));
 	};
 	loadState = res  =>  {
+		
 	this.setState({ books: res.data.books, title: '', author: '' });
 	sessionStorage.setItem('socketPort',res.data.port);
 }
