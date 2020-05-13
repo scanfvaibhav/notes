@@ -6,7 +6,7 @@ import { TextField,List} from '@material-ui/core';
 const { isEmpty } = require('lodash');
 
 
-const socket = openSocket(window.location.protocol+"//"+window.location.hostname+':'+sessionStorage.socketPort);
+const socket = openSocket("ws://"+window.location.hostname+':'+sessionStorage.socketPort);
 
 class Chat extends Component {
   constructor(props) {
