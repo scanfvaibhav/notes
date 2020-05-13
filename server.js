@@ -8,7 +8,8 @@ const Chat = require('./models/chat');
 const routes = require('./routes');
 
 const PORT = process.env.PORT || 5000;
-
+const SOCKET_PORT = PORT-1;
+module.exports=SOCKET_PORT;
 // require db connection
 require('./models');
 
@@ -51,6 +52,6 @@ io.on('connection', function(socket){
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
 });
-io.listen('8081', () => {
-	console.log(`Server listening on port ${'8081'}.`);
+io.listen(SOCKET_PORT, () => {
+	console.log(`Server listening on port ${SOCKET_PORT}.`);
 });
