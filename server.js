@@ -12,13 +12,13 @@ const PORT = process.env.PORT || 5000;
 require('./models');
 
 // configure body parser for AJAX requests
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+express().use(express.urlencoded({ extended: true }));
+express().use(express.json());
 
 // add this line
-app.use(express.static('client/build'));
+express().use(express.static('client/build'));
 
-app.use(routes);
+express().use(routes);
 
 io.on('connection', function(socket){
     console.log('a user connected');
