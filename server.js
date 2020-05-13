@@ -1,8 +1,7 @@
 const express = require('express');
-const app = express();
+const app = require('http').createServer();
 
-const http = require('http').Server(express);
-const io = require('socket.io')(http);
+const io = require('socket.io')(app);
 const Chat = require('./models/chat');
 
 const routes = require('./routes');
@@ -48,6 +47,6 @@ io.on('connection', function(socket){
   });
   
 // Bootstrap server
-http.listen(PORT, () => {
+app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
 });
