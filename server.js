@@ -1,7 +1,8 @@
 const express = require('express');
-const app = require('http').createServer();
+const app = express();
 
-const io = require('socket.io')(app);
+const http = require('http').Server(express);
+const io = require('socket.io')(http);
 const Chat = require('./models/chat');
 
 const routes = require('./routes');
@@ -12,13 +13,13 @@ const PORT = process.env.PORT || 5000;
 require('./models');
 
 // configure body parser for AJAX requests
-express().use(express.urlencoded({ extended: true }));
-express().use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // add this line
-express().use(express.static('client/build'));
+app.use(express.static('client/build'));
 
-express().use(routes);
+app.use(routes);
 
 io.on('connection', function(socket){
     console.log('a user connected');
@@ -49,4 +50,7 @@ io.on('connection', function(socket){
 // Bootstrap server
 app.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
+});
+io.listen('8081', () => {
+	console.log(`Server listening on port ${'8081'}.`);
 });
