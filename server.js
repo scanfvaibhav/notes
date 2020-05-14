@@ -49,9 +49,7 @@ io.on('connection', function(socket){
   });
   
 // Bootstrap server
-app.listen(PORT, () => {
+io.listen(PORT, () => {
 	console.log(`Server listening on port ${PORT}.`);
 });
-io.listen(SOCKET_PORT, () => {
-	console.log(`Server listening on port ${SOCKET_PORT}.`);
-});
+
