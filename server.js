@@ -1,26 +1,21 @@
 const express = require('express');
-const app = express();
-
-const http = require('http').Server(express);
-const io = require('socket.io')(http);
-const Chat = require('./models/chat');
+const socketIO = require('socket.io');
 
 const routes = require('./routes');
+const Chat = require('./models/chat');
 
 const PORT = process.env.PORT || 5000;
-const SOCKET_PORT = PORT-1;
-module.exports=SOCKET_PORT;
+const INDEX = '/index.html';
+
+const server = express()
+  .use(routes)
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+const io = socketIO(server);
 // require db connection
 require('./models');
 
 // configure body parser for AJAX requests
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-
-// add this line
-app.use(express.static('client/build'));
-
-app.use(routes);
 
 io.on('connection', function(socket){
     console.log('a user connected');
@@ -48,8 +43,5 @@ io.on('connection', function(socket){
    
   });
   
-// Bootstrap server
-io.listen(PORT, () => {
-	console.log(`Server listening on port ${PORT}.`);
-});
+
 
