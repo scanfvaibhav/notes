@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
-import openSocket from 'socket.io-client';
+import io from 'socket.io-client';
 import { TextField,List} from '@material-ui/core';
 
 const { isEmpty } = require('lodash');
 
-var url = "wss://"+window.location.hostname+':'+sessionStorage.socketPort;
-const socket = openSocket(url);
+var url = "ws://"+window.location.hostname+':'+sessionStorage.socketPort;
+const socket = io(url);
 
 class Chat extends Component {
   constructor(props) {
