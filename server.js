@@ -5,7 +5,6 @@ const routes = require('./routes');
 const Chat = require('./models/chat');
 
 const PORT = process.env.PORT || 5000;
-const INDEX = '/index.html';
 
 const server = express()
   .use(routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/build'))

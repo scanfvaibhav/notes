@@ -1,13 +1,11 @@
 const Book = require('../models/Books');
-const PORT = process.env.PORT || 5000;
 
 // Defining all methods and business logic for routes
 
 module.exports = {
 	findAll: function(req, res) {
 		Book.find(req.query)
-			.then(books => res.json({books:books,
-			port:PORT-1}))
+			.then(books => res.json(books))
 			.catch(err => res.status(422).json(err));
 	},
 	findById: function(req, res) {
