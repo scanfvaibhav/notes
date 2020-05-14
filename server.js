@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 5000;
 const INDEX = '/index.html';
 
 const server = express()
-  .use(routes)
+  .use(routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/build'))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
