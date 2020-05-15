@@ -7,28 +7,28 @@ import { Col, Row, Container } from '../../components/Grid';
 import { List, ListItem } from '../../components/List';
 import { Input, FormBtn } from '../../components/Form';
 
-class Books extends Component {
+class Users extends Component {
 	state = {
-		books: [],
-		title: '',
-		author: ''
+		Users: [],
+		name: '',
+		id: ''
 	};
 
 	componentDidMount() {
-		this.loadBooks();
+		this.loadUsers();
 	}
 
-	loadBooks = () => {
-		API.getBooks()
+	loadUsers = () => {
+		API.getUsers()
 			.then(res => this.loadState(res))
 			.catch(err => console.log(err));
 	};
 	loadState = (res)  =>  {
-		this.setState({ books: res.data, title: '', author: '' });
+		this.setState({ Users: res.data, name: '', id: '' });
 	};
-	deleteBook = id => {
-		API.deleteBook(id)
-			.then(res => this.loadBooks())
+	deleteUser = id => {
+		API.deleteUser(id)
+			.then(res => this.loadUsers())
 			.catch(err => console.log(err));
 	};
 
@@ -41,12 +41,12 @@ class Books extends Component {
 
 	handleFormSubmit = event => {
 		event.preventDefault();
-		if (this.state.title && this.state.author) {
-			API.saveBook({
-				title: this.state.title,
-				author: this.state.author
+		if (this.state.name && this.state.id) {
+			API.saveUser({
+				name: this.state.name,
+				id: this.state.id
 			})
-				.then(res => this.loadBooks())
+				.then(res => this.loadUsers())
 				.catch(err => console.log(err));
 		}
 	};
@@ -57,44 +57,44 @@ class Books extends Component {
 				<Row>
 					<Col size="md-6">
 						<Jumbotron>
-							<h1>What Books Should?</h1>
+							<h1>What Users Should?</h1>
 						</Jumbotron>
 						<form>
 							<Input
-								value={this.state.title}
+								value={this.state.name}
 								onChange={this.handleInputChange}
-								name="title"
-								placeholder="Title (required)"
+								name="name"
+								placeholder="name (required)"
 							/>
 							<Input
-								value={this.state.author}
+								value={this.state.id}
 								onChange={this.handleInputChange}
-								name="author"
-								placeholder="Author (required)"
+								name="id"
+								placeholder="id (required)"
 							/>
 
 							<FormBtn
-								disabled={!(this.state.author && this.state.title)}
+								disabled={!(this.state.id && this.state.name)}
 								onClick={this.handleFormSubmit}
 							>
-								Submit Book
+								Submit User
 							</FormBtn>
 						</form>
 					</Col>
 					<Col size="md-6 sm-12">
 						<Jumbotron>
-							<h1>Books On My List</h1>
+							<h1>Users On My List</h1>
 						</Jumbotron>
-						{this.state.books.length ? (
+						{this.state.Users.length ? (
 							<List>
-								{this.state.books.map(book => (
-									<ListItem key={book._id}>
-										<Link to={'/books/' + book._id}>
+								{this.state.Users.map(User => (
+									<ListItem key={User._id}>
+										<Link to={'/Users/' + User._id}>
 											<strong>
-												{book.title} by {book.author}
+												{User.name} by {User.id}
 											</strong>
 										</Link>
-										<DeleteBtn onClick={() => this.deleteBook(book._id)} />
+										<DeleteBtn onClick={() => this.deleteUser(User._id)} />
 									</ListItem>
 								))}
 							</List>
@@ -108,4 +108,4 @@ class Books extends Component {
 	}
 }
 
-export default Books;
+export default Users;

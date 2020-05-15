@@ -6,12 +6,12 @@ import API from '../../utils/API';
 
 class Detail extends Component {
 	state = {
-		book: {}
+		User: {}
 	};
 
 	componentDidMount() {
-		API.getBook(this.props.match.params.id)
-			.then(res => this.setState({ book: res.data }))
+		API.getUser(this.props.match.params.id)
+			.then(res => this.setState({ User: res.data }))
 			.catch(err => console.log(err));
 	}
 
@@ -22,7 +22,7 @@ class Detail extends Component {
 					<Col size="md-12">
 						<Jumbotron>
 							<h1>
-								{this.state.book.title} by {this.state.book.author}
+								{this.state.User.name} by {this.state.User.id}
 							</h1>
 						</Jumbotron>
 					</Col>
@@ -30,7 +30,7 @@ class Detail extends Component {
 
 				<Row>
 					<Col size="md-2">
-						<Link to="/">← Back to Authors</Link>
+						<Link to="/">← Back to ids</Link>
 					</Col>
 				</Row>
 			</Container>
