@@ -1,6 +1,6 @@
-const dbuser = 'vaibhav';
-const dbpassword = 'vai123';
+const dbuser = 'abcd';
+const dbpassword = 'abcd12';
 
-const MONGODB_URI = `mongodb://${dbuser}:${dbpassword}@ds139428.mlab.com:39428/heroku_68nqk9nd`;
+const MONGODB_URI = `mongodb://${dbuser}:${dbpassword}@ds125453.mlab.com:25453/mern-example`;
 const LOCAL  = 'mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false';
 module.exports = MONGODB_URI;
