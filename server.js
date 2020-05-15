@@ -7,7 +7,7 @@ const Chat = require('./models/chat');
 const PORT = process.env.PORT || 5000;
 
 const server = express()
-  .use(routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/build'))
+  .use('/',routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/build'))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
@@ -26,18 +26,28 @@ io.on('connection', function(socket){
       console.log('message: ' + msg);
       const newChat = new Chat({
         text: msg.newMsg.text,
-        user: msg.from,
+		from: msg.from,
+		to: msg.to,
         readReceipt: false,
         date: Date.now()
-    });
-    if(io.nsps['/'].adapter.rooms["room-"+msg.from] && io.nsps['/'].adapter.rooms["room-"+msg.from].length > 1) roomno++;
-            socket.join("room-"+msg.from);
+	});
+	
+	let myRoom =  "room-"+msg.from+"-"+msg.to;
+	let guestRoom = "room-"+msg.to+"-"+msg.from;
+	let room="";
+    if(io.nsps['/'].adapter.rooms[guestRoom] && io.nsps['/'].adapter.rooms[guestRoom].length > 0) {
+		room = guestRoom;
+	}else{
+		room = myRoom;
+	}
+	socket.join(room);
+           
 
    //Send this event to everyone in the room.
    
         await newChat.save();
-        const chats = await Chat.find({});
-        io.sockets.in("room-"+msg.to).emit('newMessage', chats);
+		const chats = await Chat.find({$or:[{from: msg.to,to:msg.from},{from: msg.from,to:msg.to}]});
+        io.sockets.in(room).emit('newMessage', chats);
     });
    
   });

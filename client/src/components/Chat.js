@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import 'whatwg-fetch';
 import io from 'socket.io-client';
-import { TextField,List} from '@material-ui/core';
+import { TextField} from '@material-ui/core';
+import {List, ChatFrom} from  './List'
+import "../App.css";
 
 const { isEmpty } = require('lodash');
 
@@ -79,10 +81,8 @@ class Chat extends Component {
         />
                 <div className="chatPanel" ref={this.boxRef}>
                 <List>
-                    {!isEmpty(this.state.chat) ?this.state.chat.map(({ user, text,readReceipt }, key) => (
-                        <p key={key}>
-                             {(user===this.state.from)?"me":user}:{text}:{readReceipt?'//':'/'} 
-                        </p>
+                    {!isEmpty(this.state.chat) ?this.state.chat.map(({ from, to, text,readReceipt }, key) => (
+                        <ChatFrom key={key} children={text} my={from===this.state.from}/>
                     )):null}
                 </List>
                 </div>

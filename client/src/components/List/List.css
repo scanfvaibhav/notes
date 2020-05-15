@@ -31,3 +31,13 @@
 .list-overflow-container li:last-child {
   border-bottom: none;
 }
+.frmChat{
+  color: rgb(239, 245, 245);
+  background-color: rgb(20, 20, 20);
+  align-self: right;
+}
+.toChat{
+  text-align: center;
+  background-color: rgb(33, 34, 34);
+ color: rgb(18, 150, 202);
+}
