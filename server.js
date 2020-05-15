@@ -7,7 +7,7 @@ const Chat = require('./models/chat');
 const PORT = process.env.PORT || 5000;
 
 const server = express()
-  .use(routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/public'))
+  .use(routes).use(express.urlencoded({ extended: true })).use(express.json()).use(express.static('client/build'))
   .listen(PORT, () => console.log(`Listening on ${PORT}`));
 
 const io = socketIO(server);
