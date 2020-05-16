@@ -5,7 +5,9 @@ const chatSchema = new Schema({
     text: String,
     from: String,
     to: String,
-    readReceipt: Boolean,
+    read: Boolean,
+    sent: Boolean,
+    received : Boolean,
     date: Date
 });
 
