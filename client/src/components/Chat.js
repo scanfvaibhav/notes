@@ -48,15 +48,15 @@ onTabFocus = (value) => {
 }
 
   
-onBlur = e => {
-  socket.emit('typing', {
+onBlur = async (e) => {
+  await socket.emit('typing', {
       typing:false,
       from:this.state.from,
       to:this.state.to
   });
 }
-onFocus = e => {
-  socket.emit('typing', {
+onFocus = async (e) => {
+  await socket.emit('typing', {
       typing:true,
       from:this.state.from,
       to:this.state.to
@@ -78,8 +78,8 @@ onFocus = e => {
     this.boxRef.current.scrollTop = this.boxRef.current.scrollHeight;
 
   }
-  sendReceipt(){
-    socket.emit('receipt', 
+  async sendReceipt(){
+    await socket.emit('receipt', 
     {
         received :  true,
         read : isTabActive,
@@ -87,8 +87,8 @@ onFocus = e => {
         to:this.state.to
     });
   }
-  sendSocketIO() {
-    socket.emit('message', 
+  async sendSocketIO() {
+    await socket.emit('message', 
     {
         newMsg:{
             text:this.state.text
